@@ -158,4 +158,57 @@
 			}
 
 	以上的调用方法在module级别和app级别都有对应实现，可灵活选择
+
+
+	RPC传参数据结构
+		RPC可传参数据类型
+			1-9为基础数据类型，可直接使用。10、11为自定义结构体，需要单独定义（章节后续会单独讲解）
+			
+			1.bool
+			2.int32
+			3.int64
+			4.long64
+			5.float32
+			6.float64
+			7.[]byte
+			8.string
+			9.map[string]interface{}
+			10.protocol buffer结构体
+			11.自定义结构体
+			
+			注意调用参数不能为nil 如： result, err = module.Invoke("user", "login", "mqant", nil)会出现异常无法调用
+
+		返回值可使用的参数类型
+			handler的返回值固定为两个，其中result表示正常业务返回值，err表示异常业务返回值
+
+			result:
+				1.bool
+				2.int32
+				3.int64
+				4.long64
+				5.float32
+				6.float64
+				7.[]byte
+				8.string
+				9.map[string]interface{}
+				10.protocol buffer结构体
+				11.自定义结构体
+			
+			err:
+				1.string
+				2.error
+
+			示例
+				func (self *HelloWorld)say(name string) (result string, err error) {
+					return fmt.Sprintf("hi %v", name), nil
+				}
+
+				result, err := mqrpc.String(
+					self.Call(
+						ctx,
+						"helloworld", // 要访问的moduleType
+						"/say/hi", // 访问模块中的handler路径
+						mqrpc.Param(r.Form.Get("name")),
+					)
+				)
 */
