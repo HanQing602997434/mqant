@@ -64,6 +64,21 @@
 
 	ProtocolMarsha1
 		如下mqant默认返回值是这样的 result map[string][string], err string
-			func (m *Login) login(session)
+			func (m *Login) login(session gate.Session, msg map[string]interface{}) (result map[string][string], err string) {
+				...
+				return map[string][string]{
+					"info" : "login success"
+					""
+				},
+			}
+		rpc通信编码/解密流程：map->[]byte————[]byte->client
+		最终发送给客户端的是[]byte类型，中间经历一次[]byte->map->[]byte的无用编解码流程
 
+	如何省掉无效的编解码流程呢？
+		在后端模块提前编码为[]byte类型
+			function (this *Login) login(session gate.Session, msg map[string]interface{}) (result module.ProtocolMarsha1, err string) {
+				return this.App.ProtocolMarsha1("", "login success", "")
+			}
+		实现原理：
+			返回值用this.App.ProtocolMarsha1函数封装一遍即可，返回值改为了module.ProtocolMarsha1类型
 */
