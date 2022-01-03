@@ -8,5 +8,11 @@
 		mqant提供了一个创建代理网关的http.Handler
 
 	代码组织结构
-		
+		工程目录
+        |-bin
+            |-conf
+                |-server.conf
+        |-httpgateway
+            |-module.go
+        |-main.go
 */
