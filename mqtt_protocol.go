@@ -36,4 +36,25 @@
 
 	消息体（body）
 		消息体是二进制数据流
+
+	如何使用MQTT协议实现游戏路由
+		由于mqant目前主要用于游戏开发，因此mqant只使用了mqtt协议的一部分小功能。
+
+		mqant网关将收到信息topic解析出moduleType和handler用来定位到后端模块的对应处理方法，然后进行
+		远程RPC调用。msgid作为客户端是否需要消息应答的标记
+
+		如：
+			Topic: Chat/HD_Join/20
+			Body: {"roomName":"mqant","nick":"liangdas"}
+
+					-------------------------------》
+			客户端										mqant网关
+					《------------------------------		 |  
+														  |		moduleType :Chat
+			Topic: Chat/HD_Join/20						  |		fn		   :HD_Join
+			Body:{"Error":"","Result":"join success"}	  |		args	   :
+														  |		Session,
+														  |		{"roomName":"mqant","nick":"liangdas"}
+														  |
+														后端模块
 */
