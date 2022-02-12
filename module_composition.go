@@ -17,4 +17,18 @@
 				|- table02
 				|- table03
 				|- ...
+
+	依赖模块
+		go.mod
+		
+		github.com/liangdas/mqant-modules v1.3.1
+
+	引用
+		import (
+			"github.com/liangdas/mqant-modules/room"
+		)
+
+	开发
+		mqant-example中的示例源码
+			房间demo源码
 */
