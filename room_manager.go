@@ -40,4 +40,33 @@
     			)
     			return table, nil
 			}
+
+	获取桌子
+		GetTable(tableId string) BaseTable
+
+		// 代码
+		table := self.room.GetTable(table_id)
+
+		如果没有创建过table_id的桌子将返回nil
+
+	示例代码
+		简单聊天室
+		一个简单的聊天室功能，table_id由客户端指定，当桌子不存在则创建一个新的，然后将客户端消息写入桌子的消息队列中
+		func (self *tabletest) gatesay(session gate.Session, msg map[string]interface{}) (r string, err error) {
+    		table_id := msg["table_id"].(string)
+    		action := msg["action"].(string)
+    		table := self.room.GetTable(table_id)
+    		if table == nil {
+        		table, err = self.room.CreateById(self, table_id, self.NewTable)
+        		if err != nil {
+            		return "", err
+        		}
+    		}
+    		erro := table.PutQueue(action, session, msg)
+    		if erro != nil {
+        		return "", erro
+    		}
+    		return "success", nil
+		}
+
 */
