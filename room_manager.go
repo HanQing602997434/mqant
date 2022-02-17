@@ -69,4 +69,20 @@
     		return "success", nil
 		}
 
+	handler注册
+		func (self *tabletest) OnInit(app module.App, settings *conf.ModuleSettings) {
+    		self.BaseModule.OnInit(self, app, settings,
+        		server.RegisterInterval(15*time.Second),
+        		server.RegisterTTL(30*time.Second),
+    			)
+    		self.room = room.NewRoom(self)
+    		self.GetServer().RegisterGO("HD_room_say", self.gatesay)
+		}
+
+	跟客户端约定数据结构
+		{
+			"table_id":"{table_id}",
+			"action":"/room/say",
+			"name":"{name}"
+		}
 */
