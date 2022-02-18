@@ -22,4 +22,14 @@
 			2.GetSeats()
 				返回一个桌子内座位(用户)的map
 				GetSeats()  map[string]room.BasePlayer
+
+		可选继承函数
+		当桌子初始化后会调用OnCreate()，可以在这做一些业务初始化(加载数据)等操作，但一定要调用
+		QTable.OnCreate()
+			func (this *MyTable) OnCreate() {
+				// 可以加载数据
+				log.Info("MyTable OnCreate")
+				// 一定要调用QTable.OnCreate()
+				this.QTable.OnCreate()
+			}
 */
