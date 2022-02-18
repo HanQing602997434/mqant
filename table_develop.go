@@ -32,4 +32,16 @@
 				// 一定要调用QTable.OnCreate()
 				this.QTable.OnCreate()
 			}
+
+	第三步：初始化QTable
+		初始化参数
+		QTable有许多设置参数都可以在初始化时设置
+			OnInit(subtable SubTable, opts ...Option) error
+
+			this := &MyTable{
+        		module:  module,
+        		players: map[string]room.BasePlayer{},
+    		}
+			this.OnInit(this, opts...)
+
 */
