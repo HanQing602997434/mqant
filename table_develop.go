@@ -53,13 +53,26 @@
 				1.首先将session跟room.BasePlayer绑定
 				2.将room.BasePlayer注册桌子座位管理map中
 				3.最后广播了一条消息给所有已加入房间的客户端
-				func (this *MyTable) doJoin(session gate.Session, msg map[string]interface{}) (err error) {
-    				player := &room.BasePlayerImp{}
-    				player.Bind(session)
-    				player.OnRequest(session)
-    				this.players[session.GetSessionId()] = player
-    				_ = this.NotifyCallBackMsg("/room/join", []byte(fmt.Sprintf("welcome to %v", msg["name"])))
-    				return nil
+					func (this *MyTable) doJoin(session gate.Session, msg map[string]interface{}) (err error) {
+    					player := &room.BasePlayerImp{}
+    					player.Bind(session)
+    					player.OnRequest(session)
+    					this.players[session.GetSessionId()] = player
+    					_ = this.NotifyCallBackMsg("/room/join", []byte(fmt.Sprintf("welcome to %v", msg["name"])))
+    					return nil
+					}
+		
+		handler注册
+			路由是/room/join 处理函数为doJoin
+				func NewTable(module module.RPCModule, opts ...room.Option) *MyTable {
+    				this := &MyTable{
+        				module:  module,
+        				players: map[string]room.BasePlayer{},
+    				}
+    				this.OnInit(this, opts...)
+    				this.Register("/room/say", this.doSay)
+    				this.Register("/room/join", this.doJoin)
+    				return this
 				}
 
 */
