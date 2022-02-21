@@ -44,4 +44,22 @@
     		}
 			this.OnInit(this, opts...)
 
+	第四步：实现handler
+		桌子handler
+		房间模块跟mqant的模块工作方式类似，也支持路由+handler的方式处理消息
+
+		handler实现
+			加入房间的handler
+				1.首先将session跟room.BasePlayer绑定
+				2.将room.BasePlayer注册桌子座位管理map中
+				3.最后广播了一条消息给所有已加入房间的客户端
+				func (this *MyTable) doJoin(session gate.Session, msg map[string]interface{}) (err error) {
+    				player := &room.BasePlayerImp{}
+    				player.Bind(session)
+    				player.OnRequest(session)
+    				this.players[session.GetSessionId()] = player
+    				_ = this.NotifyCallBackMsg("/room/join", []byte(fmt.Sprintf("welcome to %v", msg["name"])))
+    				return nil
+				}
+
 */
