@@ -82,5 +82,11 @@
 				"name":"{name}"
 			}
 
-		
+		消息传递
+			1.客户端发送消息给mqant房间模块指定handler(HD_room_say)
+			2.HD_room_say通过消息中的table_id值获取(创建)桌子
+			3.通过table.PutQueue(action, session, msg)将消息写入桌子接收队列中
+			4.待桌子下一帧执行时从队列中取消息
+			5.通过action找到桌子handler
+			6.调用桌子handler执行函数
 */
