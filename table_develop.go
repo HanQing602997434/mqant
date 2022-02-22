@@ -74,5 +74,13 @@
     				this.Register("/room/join", this.doJoin)
     				return this
 				}
+		
+		跟客户端约定的数据结构
+			{
+				"table_id":"{table_id}",
+				"action":"/room/say",
+				"name":"{name}"
+			}
 
+		
 */
