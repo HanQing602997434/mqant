@@ -28,4 +28,12 @@
     		Type() string
 		}
 
+	绑定用户
+		当用户请求到桌子时，在通过安全验证后可以将用户的session绑定的对应的BasePlayer中
+		func (this *MyTable) doJoin(session gate.Session, msg map[string]interface{}) (err error) {
+    		player := &room.BasePlayerImp{}
+    		player.Bind(session)
+    		。。。
+		}
+
 */
