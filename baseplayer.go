@@ -36,4 +36,22 @@
     		。。。
 		}
 
+	更新用户状态
+		用户每次给桌子发送请求，都应该更新BasePlayer状态
+			1.可能session状态改变
+				1）断连重连上来的网关已换
+				2）有更加新的session.settings数据
+
+			2.更新用户和桌子最后通信时间
+				桌子会根据最后通信时间判断用户是否已断开跟桌子的连接（心跳）
+
+		player.OnRequest函数会帮你做上面的两件事，但你必须在每一个用户给桌子发送的handler消息中主动调用
+			func (this *MyTable) doSay(session gate.Session, msg map[string]interface{}) (err error) {
+    			player := this.FindPlayer(session)
+    			if player == nil {
+        			return errors.New("no join")
+    			}
+    			player.OnRequest(session)
+    			...
+			}
 */
