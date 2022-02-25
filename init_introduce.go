@@ -41,4 +41,12 @@
             		return nil
 				}),
 
+		Update
+			桌子每周期（帧）都会执行，如果想每周期都做一些工作，可以设置update函数，如果不设置则只执行handler
+				room.Update(this.Update)
+				每帧都会调用
+				func (this *MyTable) Update(ds time.Duration) {
+    				//ds 上一帧跟当前帧的间隔时间
+				}
+
 */
