@@ -31,4 +31,14 @@
 				1.如timeout = 0则自动检查功能关闭（需要你手动控制桌子的生命周期）
 				2.默认timeout = 60
 					room.TimeOut(60)
+
+		房间回收回调
+			当房间被回收是我们希望能够知道，方便我们做一些资源回收工作，例如房间信息存档，将房间room移除
+			等等
+				room.DestroyCallbacks(func(table room.BaseTable) error {
+            		log.Info("回收了房间: %v", table.TableId())
+            		_ = self.room.DestroyTable(table.TableId())
+            		return nil
+				}),
+
 */
