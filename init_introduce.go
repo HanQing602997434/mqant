@@ -19,4 +19,16 @@
 				1）handler未找到
 				2）handler返回错误信息
 				3）handler执行崩溃
+
+	设置函数
+		QTable.OnInit(subtable SubTable, opts ...room.Option) error
+
+	房间生命周期管理
+		
+		超时时间
+			当桌子超过指定的时间未与客户端（指所有客户端）建立通信（上行或下行通信），则认为桌子已超时，
+			会自动回收
+				1.如timeout = 0则自动检查功能关闭（需要你手动控制桌子的生命周期）
+				2.默认timeout = 60
+					room.TimeOut(60)
 */
