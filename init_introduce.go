@@ -63,4 +63,14 @@
 			1.容量是设置大小的双倍，因为会创建两个消息队列
 			2.默认值为256
 				room.Capacity(256)
+
+	异常处理函数
+		
+		当桌子handler未找到时
+			基于它你可以实现一些特殊的业务逻辑
+			room.NoFound(func(msg *room.QueueMsg) (value reflect.Value, e error) {
+        		//return reflect.ValueOf(this.doSay), nil
+        		return reflect.Zero(reflect.ValueOf("").Type()), errors.New("no found handler")
+			})
+
 */
