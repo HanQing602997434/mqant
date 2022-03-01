@@ -73,4 +73,19 @@
         		return reflect.Zero(reflect.ValueOf("").Type()), errors.New("no found handler")
 			})
 
+		handler返回错误消息
+			room.SetErrorHandle(func(msg *room.QueueMsg, err error) {
+        		log.Error("Error %v Error: %v", msg.Func, err.Error())
+			})
+
+			如下情况就会调用ErrorHandler
+			func (this *MyTable) doJoin(session gate.Session, msg map[string]interface{}) (err error) {
+    			return errors.New("逻辑异常了")
+			}
+
+		handler执行崩溃
+			当handler出现未处理的异常时，可以通过RecoverHandle监控到
+				room.SetRecoverHandle(func(msg *room.QueueMsg, err error) {
+        			log.Error("Recover %v Error: %v", msg.Func, err.Error())
+    			})
 */
