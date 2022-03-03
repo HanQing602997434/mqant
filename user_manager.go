@@ -16,4 +16,10 @@
 
 	给桌子内所有玩家广播消息
 		NotifyCallBackMsg(topic string, body []byte) error
+
+	不关注结构的发送消息
+		SendCallBackMsgNR(players []string, topic string, body []byte) error
+		NotifyCallBackMsgNR(topic string, body []byte) error
+
+	
 */
