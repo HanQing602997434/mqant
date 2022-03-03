@@ -21,5 +21,11 @@
 		SendCallBackMsgNR(players []string, topic string, body []byte) error
 		NotifyCallBackMsgNR(topic string, body []byte) error
 
-	
+	通过session查找BasePlayer
+		注意事项
+			对于游客用户使用session.GetSessionId()查找，对于登录用户使用session().GetUserId()
+			这样的做法在于如果登录用户断线重连网关切换了，通过session().GetUserId()依然可以找到
+			BasePlayer
+
+			FindPlayer(session gate.Session) BasePlayer
 */
